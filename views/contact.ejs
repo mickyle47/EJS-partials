@@ -1,11 +1,18 @@
 <%- include("partials/header.ejs") %>
 
 <h1>Contact Me</h1>
-<form>
-  <input name="name" type="text" class="feedback-input" placeholder="Name" />
-  <input name="email" type="text" class="feedback-input" placeholder="Email" />
-  <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+<form action="/contact" method="POST">
+  <input name="name" type="text" class="feedback-input" placeholder="Name" required />
+  <input name="email" type="email" class="feedback-input" placeholder="Email" required />
+  <textarea name="message" class="feedback-input" placeholder="Comment" required></textarea>
   <input type="submit" value="SUBMIT" />
 </form>
+
+<% if (typeof success !== 'undefined' && success) { %>
+  <div class="alert alert-success">Message sent successfully!</div>
+<% } %>
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert alert-danger">There was an error sending your message. Please try again.</div>
+<% } %>
 
 <%- include("partials/footer.ejs") %>
