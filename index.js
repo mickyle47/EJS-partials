@@ -36,8 +36,6 @@ app.post("/contact", async (req, res) => {
       }
     });
 
-    console.log('Transporter created');
-
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -50,14 +48,11 @@ app.post("/contact", async (req, res) => {
       `
     };
 
-    console.log('Attempting to send email...');
     await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully');
-
-    res.redirect('/contact?success=true');
+    res.json({ success: true });
   } catch (error) {
     console.error('Detailed error:', error);
-    res.redirect('/contact?error=true');
+    res.status(500).json({ success: false, error: 'Failed to send email' });
   }
 });
 

@@ -1,11 +1,14 @@
 <%- include("partials/header.ejs") %>
 
 <h1>Contact Me</h1>
-<form action="/contact" method="POST">
+<form action="/contact" method="POST" id="contactForm">
   <input name="name" type="text" class="feedback-input" placeholder="Name" required />
   <input name="email" type="email" class="feedback-input" placeholder="Email" required />
   <textarea name="message" class="feedback-input" placeholder="Comment" required></textarea>
-  <input type="submit" value="SUBMIT" />
+  <button type="submit" class="submit-btn" id="submitBtn">
+    <span class="btn-text">SUBMIT</span>
+    <span class="loader" style="display: none;"></span>
+  </button>
 </form>
 
 <% if (typeof success !== 'undefined' && success) { %>
@@ -16,3 +19,18 @@
 <% } %>
 
 <%- include("partials/footer.ejs") %>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = submitBtn.querySelector('.btn-text');
+  const loader = submitBtn.querySelector('.loader');
+
+  form.addEventListener('submit', function(e) {
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    loader.style.display = 'inline-block';
+  });
+</script>
+
+<script src="/js/contact.js"></script>
