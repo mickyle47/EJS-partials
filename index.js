@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
+app.get("/about", (req, res) => {
+  res.render("about.ejs");
+});
+
 app.get("/contact", (req, res) => {
   res.render("contact.ejs", { success: req.query.success, error: req.query.error });
 });
